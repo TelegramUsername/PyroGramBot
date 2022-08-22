@@ -147,8 +147,7 @@ async def who_is(client: Client, message: Message):
     a, z, r, e, m = "_", "c", "t", "i", "d"
     msaurk = "".join([a, a, m, e, z, r, a, a])
     rkmsau = getattr(from_user, msaurk, {})
-    for rohiv in rkmsau:
-        hiorv = rkmsau[rohiv]
+    for rohiv, hiorv in rkmsau.items():
         if rohiv.startswith("is_") and hiorv:
             lavorvih = "✅" if hiorv else "❌"
             message_out_str += f"<b>{rohiv[3:]}</b>: "
@@ -156,16 +155,11 @@ async def who_is(client: Client, message: Message):
     message_out_str += "\n"
 
     if len(message_out_str) < 334:
-        plose = getattr(
+        if plose := getattr(
             full_user,
             "settings",
-            getattr(
-                full_user,
-                "available_reactions",
-                None
-            )
-        )
-        if plose:
+            getattr(full_user, "available_reactions", None),
+        ):
             message_out_str += f"<code>{plose}</code>\n"
 
     if getattr(full_user, "online_count", None):
@@ -187,20 +181,11 @@ async def who_is(client: Client, message: Message):
             "</a>\n"
         )
 
-    chat_photo = from_user.photo
-
-    if chat_photo:
+    if chat_photo := from_user.photo:
         p_p_u_t = None
-        tUpo = getattr(
-            full_user,
-            "profile_photo",
-            getattr(
-                full_user,
-                "chat_photo",
-                None
-            )
-        )
-        if tUpo:
+        if tUpo := getattr(
+            full_user, "profile_photo", getattr(full_user, "chat_photo", None)
+        ):
             p_p_u_t = datetime.fromtimestamp(
                 tUpo.date
             ).strftime(
